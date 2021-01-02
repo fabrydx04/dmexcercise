@@ -2,6 +2,7 @@ package ar.com.fabricio.alan.garcia.feedsexercise.service.impl;
 
 import java.util.Collection;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.TreeSet;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -24,10 +25,10 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import com.google.common.base.Optional;
+
 
 import ar.com.fabricio.alan.garcia.feedsexercise.dto.response.FeedResponseDto;
-import ar.com.fabricio.alan.garcia.feedsexercise.exception.ContinuosFetchingSystemException;
+import ar.com.fabricio.alan.garcia.feedsexercise.exception.PeriodicalFetchingSystemException;
 import ar.com.fabricio.alan.garcia.feedsexercise.exception.DatabaseConnectionException;
 import ar.com.fabricio.alan.garcia.feedsexercise.exception.FeedErrorException;
 import ar.com.fabricio.alan.garcia.feedsexercise.model.Feed;
@@ -83,9 +84,9 @@ public class FeedServiceImpl implements FeedService {
 		} catch (JDBCConnectionException e) {
 			throw new DatabaseConnectionException(source.getMessage("database.error", null, Locale.ENGLISH));
 		} catch (InterruptedException e) {
-			throw new ContinuosFetchingSystemException(source.getMessage("fetch.service.error", null, Locale.ENGLISH));
+			throw new PeriodicalFetchingSystemException(source.getMessage("fetch.service.error", null, Locale.ENGLISH));
 		} catch (ExecutionException e) {
-			throw new ContinuosFetchingSystemException(source.getMessage("fetch.service.error", null, Locale.ENGLISH));
+			throw new PeriodicalFetchingSystemException(source.getMessage("fetch.service.error", null, Locale.ENGLISH));
 		} catch (Exception e) {
 			throw new FeedErrorException(source.getMessage("generic.error", null, Locale.ENGLISH));
 		}
@@ -96,12 +97,12 @@ public class FeedServiceImpl implements FeedService {
 	private void storeNewFeeds(Feed feed) {
 		feed.setDescription(Jsoup.parse(feed.getDescription()).text());
 		
-		Optional<Feed> findByTitle = feedRepository.findByTitle(feed.getTitle());
-		if(findByTitle.isPresent() && !(findByTitle.get().getDescription().equalsIgnoreCase(feed.getDescription()))) {
+		Optional<Feed> feedFound = feedRepository.findByTitle(feed.getTitle());
+		if(feedFound.isPresent() && !(feedFound.get().getDescription().equalsIgnoreCase(feed.getDescription()))) {
 			logger.info("Updating feed");
-			feedRepository.save(findByTitle.get());
+			feedRepository.save(feedFound.get());
 		}
-		else if(!findByTitle.isPresent()){
+		else if(!feedFound.isPresent()){
 			logger.info("Saving new feed");
 			feedRepository.save(feed);
 		}

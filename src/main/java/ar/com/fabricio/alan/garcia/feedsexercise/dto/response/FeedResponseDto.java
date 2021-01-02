@@ -17,14 +17,6 @@ public class FeedResponseDto {
 
 	}
 
-	public FeedResponseDto(long feedId, String title, String description, String image, Date publishedDate) {
-		this.feedId = feedId;
-		this.title = title;
-		this.description = description;
-		this.image = image;
-		this.publishedDate = publishedDate;
-	}
-
 	public long getFeedId() {
 		return feedId;
 	}

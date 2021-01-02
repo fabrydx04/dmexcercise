@@ -1,6 +1,3 @@
-########## TODO  ################
-######## services unit tests
-#################################
 
 This api fetchs new feeds in background using a secondary thread in a configurable interval and then it stores in the database the newest 10 feeds per pull. 
 In addition, it exposes an endpoint to consume the feeds.
@@ -21,7 +18,7 @@ if you want to see the database structure, you can do it here: http://localhost:
 I implemented the comparable interface in Feed entity and then I override the compareTo method to allow order feeds by publishedDate
 Feeds are added to a TreeSet which automatically order the feeds according to compareTo method
 
-I save the newest 10 feeds per fetch, I don't know if it is ok. Requeriments are not clear in this point.
+I save or update the newest 10 feeds per fetch, I don't know if it is ok. Requeriments are not clear in this point.
 
 I created a FeedConsumerService interface which extends callable and it have a method 'Call' that returns a collection of feeds.
 if you want to add more origin sources, you just have to implement that interface on your new service ensuring the homogeneity of the feeds stored in the database. 

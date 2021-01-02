@@ -16,7 +16,7 @@ public class ExceptionController {
 		return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@ExceptionHandler({ ContinuosFetchingSystemException.class })
+	@ExceptionHandler({ PeriodicalFetchingSystemException.class })
 	public ResponseEntity<String> contiunousFetchingSystemException(Exception ex, WebRequest request) {
 		return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}

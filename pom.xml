@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>ar.com.fabricio.alan.garcia</groupId>
 	<artifactId>feedsexercise</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>feedsexercise</name>
 	<description>Feeds Example Exercise</description>
 
@@ -18,7 +18,7 @@
 		<java.version>11</java.version>
 		<swagger.version>2.9.2</swagger.version>
 		<romeTools.version>1.15.0</romeTools.version>
-		<modelMapper.version>2.3.6</modelMapper.version>
+		<modelMapper.version>2.3.9</modelMapper.version>
 		<htmlparser.version>1.13.1</htmlparser.version>
 	</properties>
 

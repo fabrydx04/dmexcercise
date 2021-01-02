@@ -51,5 +51,7 @@ public class NosJournalConsumerService implements FeedConsumerService {
 			throw new FeedSourceException(source.getMessage("feed.source.error", null, Locale.ENGLISH));
 		}
 	}
+	
+	
 
 }

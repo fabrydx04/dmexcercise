@@ -2,14 +2,14 @@ package ar.com.fabricio.alan.garcia.feedsexercise.exception;
 
 import javassist.NotFoundException;
 
-public class ContinuosFetchingSystemException extends NotFoundException {
+public class PeriodicalFetchingSystemException extends NotFoundException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ContinuosFetchingSystemException(String msg) {
+	public PeriodicalFetchingSystemException(String msg) {
 		super(msg);
 	}
 
